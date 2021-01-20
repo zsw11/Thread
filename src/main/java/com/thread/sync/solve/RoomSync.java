@@ -6,7 +6,7 @@ import sun.rmi.runtime.Log;
 /**
  * @author zsw
  * @date 2021/1/19 17:18
- * @description : 面向对象思想改进sync
+ * @description : 面向对象思想改进sync，把value 封装成一个room对象
  */
 @Slf4j
 public class RoomSync{

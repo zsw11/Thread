@@ -2,6 +2,7 @@ package com.thread.create;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
@@ -28,16 +29,18 @@ public class CreateThread {
     }
 
     static void Future() throws ExecutionException, InterruptedException {
-        FutureTask<String> stringFutureTask = new FutureTask<>(() -> {
+        FutureTask<String> stringFutureTask = new FutureTask<>(() -> { // callable 创建方法
             log.info("hello,Future");
             return "100";
         });
         Thread futureThread = new Thread(stringFutureTask, "FutureThread");
         futureThread.start();
-        stringFutureTask.get();
-
+        log.info(stringFutureTask.get()); // 返回值
+        // ------------------------
 
     }
+
+
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         thread();
