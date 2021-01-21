@@ -14,7 +14,7 @@ import java.util.Hashtable;
  * Random
  * Vector
  * Hashtable
- * java.util.concurrent 包下的类
+ * java.util.concurrent 包下的类 currentHashMap atomic  lock
  *
  */
 @Slf4j
