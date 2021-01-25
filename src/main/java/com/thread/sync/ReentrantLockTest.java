@@ -1,6 +1,7 @@
 package com.thread.sync;
 
 import com.sun.org.apache.xpath.internal.operations.String;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -16,22 +17,25 @@ import java.util.concurrent.locks.ReentrantLock;
  * Condition condition = lock.newCondition();
  * lock.lock();
  * try {
- *   while(条件判断表达式) {
- *       condition.wait();
- *   }
- *  // 处理逻辑
- * } finally {
- *     lock.unlock();
+ * while(条件判断表达式) {
+ * condition.wait();
  * }
- *需要显示的获取锁，并在finally块中显示的释放锁，目的是保证在获取到锁之后，最终能够被释放。
+ * // 处理逻辑
+ * } finally {
+ * lock.unlock();
+ * }
+ * 需要显示的获取锁，并在finally块中显示的释放锁，目的是保证在获取到锁之后，最终能够被释放。
  * -----------------------------------------------------------------
  * java中已经有了内置锁：synchronized,synchronized的特点是使用简单，一切交给JVM去处理,不需要显示释放
  * 从用法上可以看出，与synchronized相比， ReentrantLock就稍微复杂一点。因为必须在finally中进行解锁操作，如果不在 finally解锁，有可能代码出现异常锁没被释放，
- *ReentrantLock的性能是明显优于synchronized的,ReentrantLock在功能上更加丰富，它具有可重入、可中断、可限时、公平锁等特点。
+ * ReentrantLock的性能是明显优于synchronized的,ReentrantLock在功能上更加丰富，它具有可重入、可中断、可限时、公平锁等特点。
+ * 可重入: 可重入是指同一个线程如果首次获得了这把锁，那么因为它是这把锁的拥有者，因此有权利再次获取这把锁
+ *        如果是不可重入锁，那么第二次获得锁时，自己也会被锁挡住.
  */
+@Slf4j
 public class ReentrantLockTest extends Thread {
     public static ReentrantLock lock = new ReentrantLock();
-    public static int i=0;
+    public static int i = 0;
 
     public ReentrantLockTest(java.lang.String thread1) {
         super.setName(thread1);
@@ -52,19 +56,55 @@ public class ReentrantLockTest extends Thread {
     }
 
     public static void main(String[] args) {
-        ReentrantLockTest thread1 = new ReentrantLockTest("thread1");
-        ReentrantLockTest thread2 = new ReentrantLockTest("thread2");
-        thread1.start();
-        thread2.start();
-        try {
-            thread1.join();
-            thread2.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(i);
+//        ReentrantLockTest thread1 = new ReentrantLockTest("thread1");
+//        ReentrantLockTest thread2 = new ReentrantLockTest("thread2");
+//        thread1.start();
+//        thread2.start();
+//        try {
+//            thread1.join();
+//            thread2.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(i);
+        m1();
     }
 
+    /*
+     * 可重入
+     * */
+    static void m1() {
+        lock.lock();
+        try{
+            log.info("m1,execute");
+            m2();
+        }finally {
+            lock.unlock();
+
+        }
+
+    }
+
+    private static void m2() {
+        lock.lock();
+        try{
+            log.info("m2,execute");
+            m3();
+        }finally {
+            lock.unlock();
+
+        }
+    }
+
+    private static void m3() {
+        lock.lock();
+        try{
+            log.info("m3,execute");
+        }finally {
+            lock.unlock();
+
+        }
+    }
 
 
 }
