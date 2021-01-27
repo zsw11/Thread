@@ -30,7 +30,7 @@ public class LockSupportTest {
         thread.start();
 //        Thread.sleep(3000);
         log.info("un park........");
-        LockSupport.unpark(thread);
+//        LockSupport.unpark(thread);
 
     }
     public static void main(String[] args) throws InterruptedException {

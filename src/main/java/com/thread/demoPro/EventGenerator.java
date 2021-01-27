@@ -8,7 +8,7 @@ package com.thread.demoPro;
 public class EventGenerator extends IntGenerator {
     private int currentEvenValue = 0;
     @Override
-    public int next() {
+    public synchronized int next() {
         ++currentEvenValue;
         ++currentEvenValue;
         return currentEvenValue;

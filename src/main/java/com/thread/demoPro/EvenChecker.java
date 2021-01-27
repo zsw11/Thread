@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 @Slf4j
 public class EvenChecker implements Runnable {
 
-    public IntGenerator intGenerator;
+    private IntGenerator intGenerator;
     private final int id;
 
     public EvenChecker(IntGenerator intGenerator, int id) {
@@ -25,11 +25,11 @@ public class EvenChecker implements Runnable {
     public void run() {
         while (!intGenerator.isCanceled()){
             int val = intGenerator.next();    // 10个线程不停地运行
-//            log.info("-----------------------,{}",val);
             if (val % 2 != 0) {
                 log.info("不能整除：{}",val);
-                intGenerator.cancel();
+                intGenerator.stop();   // 出现基数说明， ++currentEvenValue; ++currentEvenValue;为非原子性的，存在线程安全问题
             }
+            log.info("可以整除：{}",val);
 //            try {
 //                Thread.sleep(1000);
 //            } catch (InterruptedException e) {

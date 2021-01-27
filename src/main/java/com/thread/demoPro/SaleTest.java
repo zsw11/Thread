@@ -38,7 +38,7 @@ public class SaleTest {
                 }
             });
         }
-        endGate.await();
+        endGate.await();  // 线程都执行完了
         executorService.shutdown();
         log.info("剩余{}张---3",saleNum.getCount());
 //        Thread.sleep(1000); // 让线程池的线程运行完

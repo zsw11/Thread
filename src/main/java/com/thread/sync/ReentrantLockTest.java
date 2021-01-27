@@ -34,7 +34,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 @Slf4j
 public class ReentrantLockTest extends Thread {
-    public static ReentrantLock lock = new ReentrantLock();
+    public static ReentrantLock lock = new ReentrantLock(); //默认非公平锁，传true为公平锁
     public static int i = 0;
 
     public ReentrantLockTest(java.lang.String thread1) {
