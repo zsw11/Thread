@@ -8,7 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * @author zsw
  * @date 2021/1/27 15:54
- * @description : Condition 依赖于lock，可以实现线程之间的通信，比notify和wait更加的高效
+ * @description : Condition 依赖于lock，可以实现线程之间的通信，使await()让线程等待，signal()唤醒condition里的线程 比notify和wait更加的高效
  */
 public class ConditionTest {
     static class ThreadA extends Thread {
