@@ -30,7 +30,7 @@ public class DaemonsFactory implements Runnable {
         for (int i = 0; i < 10; i++) {
             executorService.execute(new DaemonsFactory());
         }
-        log.info("All Deamons End");
+         log.info("All Deamons End");
         TimeUnit.MILLISECONDS.sleep(300);
     }
 }

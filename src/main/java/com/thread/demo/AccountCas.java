@@ -37,7 +37,7 @@ public class AccountCas implements Account {
             // 修改后的余额
             int next = prev - amount;
             //真正修改的
-            if (balance.compareAndSet(prev, next)) {
+            if (balance.compareAndSet(prev-amount, next)) {
                 break;
             }
         }
@@ -45,7 +45,7 @@ public class AccountCas implements Account {
 
     static void demo(AccountCas accountCas) {
         ArrayList<Thread> ts = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 10; i++) {
             ts.add(new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -56,9 +56,11 @@ public class AccountCas implements Account {
 
     }
 
-    public static void main(String[] args) {
-//        AccountCas accountCas = new AccountCas(10000);
+    public static void main(String[] args) throws InterruptedException {
+//        AccountCas accountCas = new AccountCas(100);
 //        demo(accountCas);
+////        Thread.currentThread().join();
+//        Thread.sleep(1000);
 //        log.info("余额:{}", accountCas.getBalance());
         AtomicInteger atomicInteger = new AtomicInteger();  //AtomicInteger的基本方法
         log.info("i:{}",atomicInteger.get()); // 0

@@ -28,15 +28,15 @@ public class AccountSync implements Account {
     @Override
     public void withdraw(Integer amount) {
         synchronized (this) {
-            this.balance -= balance;
+            this.balance -= amount;
         }
     }
     /*
-     *方法内开启1000个线程，每个线程做-10的原子操作
+     *方法内开启100个线程，每个线程做-10的原子操作
      * */
     static void demo(Account account) {
         ArrayList<Thread> ts = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             ts.add(new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -45,7 +45,7 @@ public class AccountSync implements Account {
             }));
         }
         long start = System.nanoTime();
-        ts.forEach(Thread::start);  // 开启每一个线程
+        ts.forEach(Thread::start);  // 开启集合里的每一个线程
         ts.forEach(thread -> {
             try {
                 thread.join();
