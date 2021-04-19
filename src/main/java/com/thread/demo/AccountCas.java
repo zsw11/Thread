@@ -37,7 +37,7 @@ public class AccountCas implements Account {
             // 修改后的余额
             int next = prev - amount;
             //真正修改的
-            if (balance.compareAndSet(prev-amount, next)) {
+            if (balance.compareAndSet(prev, next)) {
                 break;
             }
         }
@@ -68,6 +68,12 @@ public class AccountCas implements Account {
         log.info("i:{}",atomicInteger.getAndSet(1)); // 1
         atomicInteger.set(11);
         // 把atomicInteger值和expect值做比较，如果相等，则返回true，atomicInteger值为update。如果不相等返回false，atomicInteger值为原来的值
-        log.info("boolean:{},比较后结果：{}",atomicInteger.compareAndSet(13,9),atomicInteger);
+        while (true){
+            boolean b = atomicInteger.compareAndSet(11, 12);
+            if (b){
+                break;
+            }
+        }
+        log.info("boolean:{},比较后结果：{}",atomicInteger.compareAndSet(12,13),atomicInteger);
     }
 }

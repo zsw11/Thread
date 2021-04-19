@@ -58,7 +58,8 @@ public class AtomicIntegerTest {
         private void safeCounter(){
             for(;;){  // 死循环
                 int a = atomicInteger.get();
-                boolean b = atomicInteger.compareAndSet(a, ++a); // 如果续期值i等于本来的值i，则更新值为++i.(+1)
+                System.out.println(Thread.currentThread().getName());
+                boolean b = atomicInteger.compareAndSet(a, ++a); // 如果续期值a等于本来的值a，则更新值为++a.(+1)
                 if (b) {
                     break;  // 死循环退出
                 }
