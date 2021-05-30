@@ -1,11 +1,9 @@
-package com.thread.fangzhipengdemo;
+package com.thread.JUC.fangzhipengdemo;
 
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * @author zsw

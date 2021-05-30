@@ -1,4 +1,4 @@
-package com.thread.newclass;
+package com.thread.JUC;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;

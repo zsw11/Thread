@@ -1,4 +1,4 @@
-package com.thread.newclass;
+package com.thread.JUC;
 
 /**
  * @author zsw
