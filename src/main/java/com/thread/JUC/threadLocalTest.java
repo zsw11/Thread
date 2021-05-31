@@ -9,16 +9,22 @@ package com.thread.JUC;
 public class  threadLocalTest {
 
     public static void main(String[] args) {
-        Thread zsw = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                ThreadLocal<String> threadLocal = new ThreadLocal<>();
-                threadLocal.set("zsw");
-                threadLocal.set("zsw111");
-//                threadLocal.remove();
-                System.out.println( threadLocal.get());
-            }
-        });
-        zsw.start();
+        test();
+//        Thread zsw = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                ThreadLocal<String> threadLocal = new ThreadLocal<>();
+//                threadLocal.set("zsw");
+//                threadLocal.set("zsw111");
+////                threadLocal.remove();
+//                System.out.println( threadLocal.get());
+//            }
+//        });
+//        zsw.start();
+    }
+
+    public static void test(){
+        // 获取cpu  核数
+        System.out.println(Runtime.getRuntime().availableProcessors());
     }
 }

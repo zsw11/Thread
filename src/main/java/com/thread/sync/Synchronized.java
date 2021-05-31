@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  * 普通同步方法，锁是当前实例对象。
  * 静态同步方法，锁是当前类的class对象。
- * 同步代码块，锁是括号中的对象。
+ * 同步代码块，锁是括号中的实例对象。
  */
 @Slf4j
 public class Synchronized {
