@@ -7,12 +7,12 @@ import java.util.concurrent.CyclicBarrier;
 /**
  * @author zsw
  * @date 2021/1/27 15:25
- * @description : CyclicBarrier 计时器 可以还是多个线程挂起，到达某一个状态下执行。
+ * @description : CyclicBarrier 加法计时器（环形栅栏） 可以还是多个线程挂起，到达某一个状态下执行。
  * 用来挂起当前线程，直至所有线程都到达barrier状态再同时执行后续任务；
  */
 public class CyclicBarrierTest {
     public static void main(String[] args) {
-        final int n=4;
+        final int n=4; //这里要用final 修饰，把n 放到方法区，多线程开启新的线程才能访问到
         CyclicBarrier cyclicBarrier = new CyclicBarrier(n, new Runnable() {
             @Override
             public void run() {

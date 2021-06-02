@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 /**
- * 可以维护当前访问自身的线程个数，并提供了同步机制
+ * 可以维护当前访问自身的线程个数，并提供了同步机制，信号量
  */
 public class SemaphoreTest {
     public static void main(String[] args) {
