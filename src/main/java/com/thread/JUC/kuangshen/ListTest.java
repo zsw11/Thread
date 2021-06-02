@@ -1,8 +1,7 @@
 package com.thread.JUC.kuangshen;
 
-import java.util.*;
+import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author zsw
