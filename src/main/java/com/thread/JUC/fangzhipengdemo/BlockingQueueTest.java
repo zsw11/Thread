@@ -6,10 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.Queue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.UUID;
+import java.util.concurrent.*;
 
 /**
  * @author zsw
@@ -23,32 +21,53 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 @Slf4j
 public class BlockingQueueTest {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
         //声明一个缓存为10的队列
-        BlockingQueue<String> strings = new LinkedBlockingQueue<>(10);
-//        ArrayQueue<String> strings= new ArrayQueue<String>(10);
+        BlockingQueue<String> queue = new LinkedBlockingQueue<>(100);
+//        ArrayQueue<String> queue= new ArrayQueue<String>(10);
         ExecutorService executorService = Executors.newCachedThreadPool();
         for (int i = 0; i < 100; i++) {
             executorService.submit(new Thread(new Runnable() {
                 @SneakyThrows
                 @Override
                 public void run() {
-                    if (strings.isEmpty()){
-                        strings.put("zsw");
-                    }else {
-                        String s = strings.take();
-                        strings.put(s + "z");
-                    }
-
+                    queue.put("zsw");
                 }
             }));
         }
 
 //        executorService.shutdown();
-        log.info("take:{}",strings);
-//        String take = strings.take();
-//        log.info("take:{}",take);
-
+        log.info("take:{}", queue);
     }
 
+}
+/**
+ * book 书 ，每次递减一，返回剩余数量，模拟并发下超卖现象
+ */
+class book implements Callable {
+    private int sum;
+
+    public book(int sum) {
+        this.sum = sum;
+    }
+
+    @Override
+    public Object call() throws Exception {
+        if(sum>0){
+            sum = sum-1;
+            System.out.println("剩余："+sum);
+        }
+        return sum;
+    }
+}
+
+class product implements Runnable{
+    private BlockingQueue queue;
+
+    @SneakyThrows
+    @Override
+    public void run() {
+        String str = UUID.randomUUID().toString().substring(0,3);
+        queue.put(str);
+    }
 }

@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @description : 在Java中可以通过锁和循环CAS的方式来实现原子操作
  * 基于CAS线程安全的计数器
  * 方法safeCount和一个非线程安全的计数器count
+ * AtomicStampedReference 乐观锁 加版本号，解决ABA问题
  */
 @Slf4j
 public class AtomicIntegerTest {

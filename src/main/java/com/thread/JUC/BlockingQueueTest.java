@@ -9,9 +9,9 @@ import java.util.concurrent.Executors;
  *BlockingQueueTest
  */  
 public class BlockingQueueTest {  
-    public static class Basket {  
+    public static class Basket {
   
-        BlockingQueue<String> basket = new ArrayBlockingQueue<String>(2);  
+        BlockingQueue<String> basket = new ArrayBlockingQueue<String>(2);
   
         //生产苹果  
         public void product() throws InterruptedException {  
@@ -43,7 +43,7 @@ public class BlockingQueueTest {
   
                         //休眠300ms  
   
-                        Thread.sleep(300);  
+                        Thread.sleep(300);
                     }  
                 } catch (InterruptedException  e1){  
                     e1.printStackTrace();  
@@ -68,7 +68,7 @@ public class BlockingQueueTest {
   
                         //休眠1000ms  
   
-                        Thread.sleep(1000);  
+                        Thread.sleep(1000);
   
                     }  
                 } catch (InterruptedException e2) {  
