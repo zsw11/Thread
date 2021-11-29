@@ -3,6 +3,7 @@ package com.thread.JUC;
 import lombok.SneakyThrows;
 
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author zsw
@@ -11,12 +12,12 @@ import java.util.concurrent.CyclicBarrier;
  * 用来挂起当前线程，直至所有线程都到达barrier状态再同时执行后续任务；
  */
 public class CyclicBarrierTest {
-    public static void main(String[] args) {
-        final int n=4; //这里要用final 修饰，把n 放到方法区，多线程开启新的线程才能访问到
+    public static void main(String[] args) throws InterruptedException {
+        final int n = 1000; //这里要用final 修饰，把n 放到方法区，多线程开启新的线程才能访问到
         CyclicBarrier cyclicBarrier = new CyclicBarrier(n, new Runnable() {
             @Override
             public void run() {
-                System.out.println("我达到了状态");
+                System.out.println("我达到了状态:");
             }
         });
         for (int i = 0; i < n; i++) {
@@ -24,13 +25,23 @@ public class CyclicBarrierTest {
                 @SneakyThrows
                 @Override
                 public void run() {
-                    System.out.println(Thread.currentThread().getName()+"线程开始");
+//                    System.out.println(Thread.currentThread().getName() + "线程开始");
 //                    TimeUnit.SECONDS.sleep(3);
+                    int a = 0;
                     cyclicBarrier.await(); // 4个线程运行到这，线程挂起，运行cyclicBarrier，输出到达了状态才运行。
-                    System.out.println(Thread.currentThread().getName()+"线程结束");
+                    addNum(a);
+//                    System.out.println(Thread.currentThread().getName() + "线程结束");
+
                 }
             }).start();
         }
+        TimeUnit.SECONDS.sleep(1);
+
+    }
+
+    static void addNum(int a){
+        a++;
+        System.out.println(a);
     }
 }
 /**

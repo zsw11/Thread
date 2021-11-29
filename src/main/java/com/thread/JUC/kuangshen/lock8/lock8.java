@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author zsw
  * @date 2021/5/31 15:37
- * @description : lock8 什么是锁，锁住的是什么？ 对象实例？ 还是class？
+ * @description : lock8 什么是锁，synchronized锁住的是什么？ 对象实例？ 还是class？
  */
 public class lock8 {
     public static void main(String[] args) {
