@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * @author zsw
  * @date 2021/11/30 16:09
- * @Company: 广州市两棵树网络科技有限公司
+ * @Company: 广州市两棵树网络科技有限公司   案例：https://www.cnblogs.com/wuwuyong/p/15496841.html
  * 创建CompletableFuture直接new对象也成。一个completableFuture对象代表着一个任务
  */
 @Slf4j
