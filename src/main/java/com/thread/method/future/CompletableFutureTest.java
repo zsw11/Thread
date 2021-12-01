@@ -40,15 +40,28 @@ public class CompletableFutureTest {
                 return 1.2;
             }
         });
-        //cf关联的异步任务的返回值作为方法入参，传入到thenApply的方法中
-        //thenApply这里实际创建了一个新的CompletableFuture实例
-        //thenAccept 同 thenApply 接收上一个任务的返回值作为参数，但是无返回值；thenRun 的方法没有入参，也买有返回值
-        CompletableFuture<String> cf2 = cf.thenApply((result) -> {
-            System.out.println(Thread.currentThread() + " start job2,time->" + System.currentTimeMillis());
+        CompletableFuture cf3 = CompletableFuture.runAsync(() -> {
+            System.out.println(Thread.currentThread() + " start,time->" + System.currentTimeMillis());
             try {
-                Thread.sleep(2000);
+                Thread.sleep(4000);
             } catch (InterruptedException e) {
             }
+            Boolean b = false;
+            if (b) {
+                throw new RuntimeException("test");
+            } else {
+                System.out.println(Thread.currentThread() + " exit,time->" + System.currentTimeMillis());
+            }
+        });
+        //cf关联的异步任务的返回值作为方法入参，传入到thenApply的方法中
+        //thenApply这里实际创建了一个新的CompletableFuture实例
+        //thenAccept 同 thenApply 接收上一个任务的返回值作为参数，但是无返回值；thenRun 的方法没有入参，也没有返回值
+        CompletableFuture<String> cf2 = cf.thenApply((result) -> {
+            System.out.println(Thread.currentThread() + " start job2,time->" + System.currentTimeMillis());
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//            }
             System.out.println(Thread.currentThread() + " exit job2,time->" + System.currentTimeMillis());
             return "test:" + result;
         });
@@ -57,6 +70,8 @@ public class CompletableFutureTest {
         //等待子任务执行完成，获取结果 1.2。如果子线程抛出异常，这里会抛出异常
         System.out.println("run result->" + cf.get());
         System.out.println("main thread exit,time->" + System.currentTimeMillis());
+        CompletableFuture.allOf(cf, cf2, cf3).get();
+        System.out.println("cf,cf2,cf3全部完成");
     }
 
     static void runAsync() throws ExecutionException, InterruptedException {
