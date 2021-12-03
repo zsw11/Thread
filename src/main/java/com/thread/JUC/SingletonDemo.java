@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @desc DCL单例 + volatile（禁止指令重排）
- * @Author xw
+ *@Author zsw
  * @Date 2019/8/20
  */
 public class SingletonDemo {
