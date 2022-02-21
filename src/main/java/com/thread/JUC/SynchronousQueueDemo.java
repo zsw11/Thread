@@ -23,12 +23,24 @@ public class SynchronousQueueDemo {
             }
         });
 
+        Thread putThread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("put thread start2");
+                try {
+                    queue.put(2);
+                } catch (InterruptedException e) {
+                }
+                System.out.println("put thread end2");
+            }
+        });
+
         Thread takeThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 System.out.println("take thread start");
                 try {
-                    System.out.println("take from putThread: " + queue.take());
+                    System.out.println("take from Thread: " + queue.take());
                 } catch (InterruptedException e) {
                 }
                 System.out.println("take thread end");
@@ -36,6 +48,7 @@ public class SynchronousQueueDemo {
         });
 
         putThread.start();
+        putThread2.start();//  1和2只有一个会被 take()另外一个会被阻塞，直到被一个线程take()
         Thread.sleep(1000);
         takeThread.start();
     }
