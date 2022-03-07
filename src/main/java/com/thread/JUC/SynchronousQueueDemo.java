@@ -1,6 +1,7 @@
 package com.thread.JUC;
 
 import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * SynchronousQueue 也是一个队列来的，但它的特别之处在于它内部没有容器，一个生产线程，当它生产产品（即put的时候），
