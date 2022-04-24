@@ -2,8 +2,7 @@ package com.thread.hreadPoolExecutor;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * @author zsw
@@ -18,7 +17,7 @@ public class TPoolExector {
 //        ExecutorService executorService = Executors.newSingleThreadScheduledExecutor();// 创建 1，max, 0秒
 //        ExecutorService executorService = Executors.newFixedThreadPool(10);// 创建 10，10, 0秒
         ExecutorService executorService = Executors.newScheduledThreadPool(10);// 创建 10，max, 0秒
-
+        new ThreadPoolExecutor(1, 100, 10L, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(100));//推荐用这种方式创建线程池
         for (int i = 0; i < 100; i++) {
             executorService.submit(new Thread(new Runnable() {
                 @Override
