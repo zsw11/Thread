@@ -51,7 +51,7 @@ public class SynchronousQueueDemo {
         putThread.start();
         putThread2.start();//  1和2只有一个会被 take()另外一个会被阻塞，直到被一个线程take()
         Thread.sleep(1000);
-//        takeThread.start();
+        takeThread.start();
     }
 //    put thread start   // queue.put(1);后线程就阻塞了。只有 queue.take()消费了，put线程才会返回
 //    take thread start
