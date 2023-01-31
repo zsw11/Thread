@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * @author zsw
  * @date 2021/6/2 13:50
- * @description : 读写锁 ReadWriteLock (多个线程读读不加锁，读写加锁，写写加锁)
+ * @description : 读写锁 ReadWriteLock (读多写少的场景,读取不加锁，多个线程一起读取)
  *  独占锁（写锁）一次只能被一个线程占有
  *  共享锁（读锁） 多个线程可以占有
  */
