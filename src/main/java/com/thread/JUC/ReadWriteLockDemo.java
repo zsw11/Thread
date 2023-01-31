@@ -40,6 +40,7 @@ class myCache {
             System.out.println(Thread.currentThread().getName()+"开始写入");
             cache.put(key, value);
             System.out.println(Thread.currentThread().getName()+"写入完成"+value);
+            TimeUnit.SECONDS.sleep(1);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -50,9 +51,10 @@ class myCache {
     public void get(String key) {
         readWriteLock.readLock().lock();
         try {
-            System.out.println(Thread.currentThread().getName() + "开始读取");
+//            System.out.println(Thread.currentThread().getName() + "开始读取");
             Object o = cache.get(key);
             System.out.println(Thread.currentThread().getName() + "读取到了" + o);
+            TimeUnit.SECONDS.sleep(5);//自己运行会发现 在运行写数据是串行的，每次写入数据都需要等待1S，而读数据则是瞬间5个线程一起读取的
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
