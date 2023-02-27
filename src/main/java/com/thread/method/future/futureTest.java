@@ -1,4 +1,4 @@
-package com.thread.hreadPoolExecutor.future;
+package com.thread.method.future;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
